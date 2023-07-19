@@ -66,7 +66,7 @@ Files need to create SYCL target library from RTL source include:
 - A header file containing valid SYCL kernel language and declares the signatures of functions implemented by the RTL component.
 - A SYCL based emulation model file for RTL component
 
-The RTL is used when compiling for the hardware whereas the emulation model is used when the oneAPI program is run on the FPGA emulator.
+The RTL is used when compiling for hardware whereas the emulation model is used when the oneAPI program is run on the FPGA emulator.
 After having the library file, the function in the library can be called from SYCL kernel, without need to know the hardware design or implementation details on underlying functions in the library.
 Refer to the tutorial [Using FPGA Cross-Language Libraries](https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Tools/use_library) for more details.
 
