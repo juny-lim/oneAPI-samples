@@ -77,7 +77,7 @@ int main() {
 
     std::cout << "Running on device: "
               << device.get_info<sycl::info::device::name>().c_str()
-              << std::endl;\
+              << std::endl;
     {
       
       InputPipeA::write(q, kA);
