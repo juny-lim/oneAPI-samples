@@ -7,7 +7,9 @@ This FPGA tutorial demonstrates how to build SYCL device libraries from RTL sour
 | What you will learn   | How to integrate customised DSP block RTL into your oneAPI program and emulate it using a C model, as well as pulling the RTL directly into your full system design.
 | Time to complete      | 30 minutes
 | Category              | Concepts and Functionality
+## Purpose
 
+This FPGA tutorial demonstrates how to allow DSP customisation in RTL sources and use them in your SYCL design. A RTL library can be used to customize DSP block behaviour, leading to embedding high performance FPGA code, handwritten in Verilog into your oneAPI program.
 > **Note**: Even though the Intel DPC++/C++ OneAPI compiler is enough to compile for emulation, generating reports and generating RTL, there are extra software requirements for the simulation flow and FPGA compiles.
 >
 > For using the simulator flow, Intel® Quartus® Prime Pro Edition and one of the following simulators must be installed and accessible through your PATH:
