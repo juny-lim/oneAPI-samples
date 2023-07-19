@@ -60,7 +60,7 @@ You can also find more information about [troubleshooting build errors](/DirectP
 
 Prior to this tutorial, tutorial [Using FPGA Cross-Language Libraries](https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Tools/use_library) demonstrated how to generate static library from an RTL source.
 
-Files need to create SYCL target library from RTL source include:
+Files needed to create a SYCL target library from RTL source include:
 - Verilog, System Verilog, or VHDL files that define the RTL component
 - An Object Manifest File (.xml) which contains properties need to integrate RTL component into SYCL pipeline
 - A header file containing valid SYCL kernel language and declares the signatures of functions implemented by the RTL component.
