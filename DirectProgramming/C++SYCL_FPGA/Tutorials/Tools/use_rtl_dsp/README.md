@@ -45,9 +45,6 @@ flowchart LR
 Find more information about how to navigate this part of the code samples in the [FPGA top-level README.md](/DirectProgramming/C++SYCL_FPGA/README.md).
 You can also find more information about [troubleshooting build errors](/DirectProgramming/C++SYCL_FPGA/README.md#troubleshooting), [running the sample on the Intel® DevCloud](/DirectProgramming/C++SYCL_FPGA/README.md#build-and-run-the-samples-on-intel-devcloud-optional), [using Visual Studio Code with the code samples](/DirectProgramming/C++SYCL_FPGA/README.md#use-visual-studio-code-vs-code-optional), [links to selected documentation](/DirectProgramming/C++SYCL_FPGA/README.md#documentation), etc.
 
-## Purpose
-
-This FPGA tutorial demonstrates how to allow DSP customisation in RTL sources and use them in your SYCL design. A RTL library can be used to customize DSP block behaviour, leading to embedding high performance FPGA code, handwritten in Verilog into your oneAPI program.
 
 ### Use of RTL libraries in SYCL
 
