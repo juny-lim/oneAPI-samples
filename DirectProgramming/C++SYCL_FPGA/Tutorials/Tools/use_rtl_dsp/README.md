@@ -10,6 +10,14 @@ This FPGA tutorial demonstrates how to build SYCL device libraries from RTL sour
 ## Purpose
 
 This FPGA tutorial demonstrates how to allow DSP customisation in RTL sources and use them in your SYCL design. A RTL library can be used to customize DSP block behaviour, leading to embedding high performance FPGA code, handwritten in Verilog into your oneAPI program.
+## Prerequisites
+
+| Optimized for       | Description
+|:---                 |:---
+| OS                  | Ubuntu* 18.04/20.04 <br> RHEL*/CentOS* 8 <br> SUSE* 15 <br> Windows* 10
+| Hardware            | Intel® Agilex® 7, Arria® 10, and Stratix® 10 FPGAs
+| Software            | Intel® oneAPI DPC++/C++ Compiler
+
 > **Note**: Even though the Intel DPC++/C++ OneAPI compiler is enough to compile for emulation, generating reports and generating RTL, there are extra software requirements for the simulation flow and FPGA compiles.
 >
 > For using the simulator flow, Intel® Quartus® Prime Pro Edition and one of the following simulators must be installed and accessible through your PATH:
@@ -18,8 +26,8 @@ This FPGA tutorial demonstrates how to allow DSP customisation in RTL sources an
 > - ModelSim® SE
 >
 > When using the hardware compile flow, Intel® Quartus® Prime Pro Edition must be installed and accessible through your PATH.
->
-> :warning: Make sure you add the device files associated with the FPGA that you are targeting to your Intel® Quartus® Prime installation.
+
+> **Warning** Make sure you add the device files associated with the FPGA that you are targeting to your Intel® Quartus® Prime installation.
 
 
 > :warning: When targeting an IP-only flow, the RTL library feature will not work when compiling to Quartus and will error out in the late-stage compile. RTL libraries will work in the simulation flow. This will be fixed in a future release. This is documented in the [compiler release notes](https://www.intel.com/content/www/us/en/developer/articles/release-notes/intel-oneapi-dpc-c-compiler-release-notes.html).
