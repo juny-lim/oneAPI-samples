@@ -70,7 +70,7 @@ The RTL is used when compiling for hardware whereas the emulation model is used 
 After having created the library file, the function in the library can be called from the SYCL kernel, without the need to know the hardware design or implementation details on underlying functions in the library.
 Refer to the tutorial [Using FPGA Cross-Language Libraries](https://github.com/oneapi-src/oneAPI-samples/tree/master/DirectProgramming/C%2B%2BSYCL_FPGA/Tutorials/Tools/use_library) for more details.
 
-Given an workable RTL module that you has been using or verified, you might need to add a few tweak in order to integrate the RTL into oneAPI program.
+Given a workable RTL module, one may need to apply some modifications in order to integrate it into oneAPI program.
 1. An RTL module must use a single input Avalon® streaming interface. 
     Besides RTL library's interface, you must include a clock port, a resetn port, and Avalon® streaming interface input and output ports (that is, ivalid, ovalid, iready, oready) into your RTL module. Name the ports as specified here.
 
