@@ -74,7 +74,7 @@ Given a workable RTL module, one may need to apply some modifications in order t
 1. An RTL module must use a single input Avalon® streaming interface. 
     Besides RTL library's interface, you must include a clock port, a resetn port, and Avalon® streaming interface input and output ports (that is, ivalid, ovalid, iready, oready) into your RTL module. Name the ports as specified here.
 
-    > **Note**: The signal names must match the ones specified in the .xml file. An error occurs during library creation if a signal name is inconsistent
+    > **Note**: The signal names must match the ones specified in the .xml file. An error occurs during library creation if a signal name is inconsistent.
 
 2. RTL library’s characteristics needs to be specified. For example, this tutorial RTL library has specified latency value, that needs to be specified in object manifest file (.xml) under ATTRIBUTES. For other ATTRIBUTES-specific elements, do refer to [Object Manifest File Syntax of an RTL Module](https://www.intel.com/content/www/us/en/docs/oneapi/programming-guide/2023-1/object-manifest-file-syntax-of-an-rtl-library.html) for additional information.
 
