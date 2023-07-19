@@ -2,13 +2,11 @@
 
 This FPGA tutorial demonstrates how to build SYCL device libraries from RTL sources and use them in your SYCL design.
 
-| Optimized for                     | Description
-|:---                               |:---
-| OS                                | 
-| Hardware                          | Intel® Agilex® 7, Arria® 10, and Stratix® 10 FPGAs
-| Software                          | Intel® oneAPI DPC++/C++ Compiler
-| What you will learn               | How to integrate customised DSP block RTL into your oneAPI program and emulate it using a C model, as well as pulling the RTL directly into your full system design.
-| Time to complete                  | 30 minutes
+| Area                  | Description
+|:---                   |:---
+| What you will learn   | How to integrate customised DSP block RTL into your oneAPI program and emulate it using a C model, as well as pulling the RTL directly into your full system design.
+| Time to complete      | 30 minutes
+| Category              | Concepts and Functionality
 
 > **Note**: Even though the Intel DPC++/C++ OneAPI compiler is enough to compile for emulation, generating reports and generating RTL, there are extra software requirements for the simulation flow and FPGA compiles.
 >
