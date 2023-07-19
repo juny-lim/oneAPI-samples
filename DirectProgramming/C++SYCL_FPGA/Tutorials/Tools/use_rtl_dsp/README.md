@@ -62,7 +62,7 @@ Prior to this tutorial, tutorial [Using FPGA Cross-Language Libraries](https://g
 
 Files needed to create a SYCL target library from RTL source include:
 - Verilog, System Verilog, or VHDL files that define the RTL component
-- An Object Manifest File (.xml) which contains properties need to integrate RTL component into SYCL pipeline
+- An Object Manifest File (.xml) which contains properties needed to integrate RTL component into SYCL pipeline
 - A header file containing valid SYCL kernel language and declares the signatures of functions implemented by the RTL component.
 - A SYCL based emulation model file for RTL component
 
