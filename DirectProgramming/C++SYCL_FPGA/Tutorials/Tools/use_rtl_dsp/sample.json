@@ -1,0 +1,45 @@
+{
+  "guid": "E2281A40-810C-4F55-8534-B8E063F9BE2F",
+  "name": "Use RTL with customised DSP",
+  "categories": ["Toolkit/oneAPI Direct Programming/C++SYCL FPGA/Tutorials/Tools"],
+  "description": "An Intel® FPGA Tutorial demonstrating how to integrate customised DSP block RTL into a Intel® oneAPI SYCL project",
+  "toolchain": ["icpx"],
+  "os": ["linux"],
+  "targetDevice": ["FPGA"],
+  "builder": ["cmake"],
+  "languages": [{"cpp":{}}],
+  "commonFolder": {
+    "base": "../../..",
+    "include": [
+      "README.md",
+      "Tutorials/Tools/use_rtl_dsp",
+      "include"
+    ],
+    "exclude": []
+  },
+  "ciTests": {
+    "linux": [
+      {
+        "id": "fpga_emu",
+        "steps": [
+          "icpx --version",
+          "mkdir build",
+          "cd build",
+          "cmake ..",
+          "make fpga_emu",
+          "./use_rtl_dsp.fpga_emu"
+        ]
+      },
+      {
+        "id": "report",
+        "steps": [
+          "icpx --version",
+          "mkdir build",
+          "cd build",
+          "cmake ..",
+          "make report"
+        ]
+      }
+    ]
+  }
+}
