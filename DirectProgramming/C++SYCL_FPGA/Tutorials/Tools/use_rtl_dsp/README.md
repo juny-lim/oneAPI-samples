@@ -32,8 +32,6 @@ This FPGA tutorial demonstrates how to allow DSP customisation in RTL sources an
 
 > :warning: When targeting an IP-only flow, the RTL library feature will not work when compiling to Quartus and will error out in the late-stage compile. RTL libraries will work in the simulation flow. This will be fixed in a future release. This is documented in the [compiler release notes](https://www.intel.com/content/www/us/en/developer/articles/release-notes/intel-oneapi-dpc-c-compiler-release-notes.html).
 
-## Prerequisites
-
 This sample is part of the FPGA code samples.
 It is categorized as a Tier 3 sample that demonstrates the usage of a tool.
 
