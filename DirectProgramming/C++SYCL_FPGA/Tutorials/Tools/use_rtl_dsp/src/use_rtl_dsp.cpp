@@ -16,46 +16,55 @@
 // Forward declare the kernel name in the global scope.
 // This FPGA best practice reduces name mangling in the optimization report.
 class KernelCompute;
-class KernelCompute_RTL;
+class KernelComputeRTL;
 
 using MyInt27 = ac_int<27, false>;
 using MyInt54 = ac_int<54, false>;
 
-class ID_PipeA;
-using InputPipeA = sycl::ext::intel::experimental::pipe<ID_PipeA, unsigned long>;
-class ID_PipeB;
-using OutputPipeB = sycl::ext::intel::experimental::pipe<ID_PipeB, unsigned long>;
-class ID_PipeC;
-using InputPipeC = sycl::ext::intel::experimental::pipe<ID_PipeC, unsigned long>;
-class ID_PipeD;
-using OutputPipeD = sycl::ext::intel::experimental::pipe<ID_PipeD, unsigned long>;
 
-template <typename pipeIN, typename pipeOUT>
-struct mult27x27_soft {
+// Using host pipes to stream data in and out of kernal
+// IDPipeA and IDPipeC will be written at host, and then read data in kernel (device)
+// IDPipeC and IDPipeD will be written at kernel (device) respectively, and then read data by host
+class IDPipeA;
+using InputPipeA = sycl::ext::intel::experimental::pipe<IDPipeA, unsigned>;
+class IDPipeB;
+using InputPipeB = sycl::ext::intel::experimental::pipe<IDPipeB, unsigned>;
+class IDPipeC;
+using OutputPipeC = sycl::ext::intel::experimental::pipe<IDPipeC, unsigned long>;
+class IDPipeD;
+using InputPipeD = sycl::ext::intel::experimental::pipe<IDPipeD, unsigned>;
+class IDPipeE;
+using InputPipeE = sycl::ext::intel::experimental::pipe<IDPipeE, unsigned>;
+class IDPipeF;
+using OutputPipeF = sycl::ext::intel::experimental::pipe<IDPipeF, unsigned long>;
+
+template <typename PipeIn1, typename PipeIn2, typename PipeOut>
+struct SoftLogicMult27x27 {
 
   streaming_interface void operator()() const {
-    MyInt27 a_val = pipeIN::read();
-    MyInt27 b_val = pipeIN::read();
+    MyInt27 a_val = PipeIn1::read();
+    MyInt27 b_val = PipeIn2::read();
     MyInt54 res =(MyInt54)a_val * b_val;
-    pipeOUT::write(res);
+    PipeOut::write(res);
   }
 };
 
-template <typename pipeIN, typename pipeOUT>
-struct mult27x27_rtl {
+// This kernel compute multiplier result by call RTL function RtlDSPm27x27u
+template <typename PipeIn1, typename PipeIn2, typename PipeOut>
+struct RtlMult27x27 {
 
   streaming_interface void operator()() const {
-    unsigned a_val = pipeIN::read();
-    unsigned b_val = pipeIN::read();
+    unsigned a_val = PipeIn1::read();
+    unsigned b_val = PipeIn2::read();
     MyInt27 a = a_val;
     MyInt27 b = b_val;
     MyInt54 res = RtlDSPm27x27u(a_val, b_val);
-    pipeOUT::write(res);
+    PipeOut::write(res);
   }
 };
 
+// This kernel compute result by performing the basic multipler soft logic
 int main() {
-  //MyInt54 result = 0;
   unsigned long result = 0;
   unsigned long result_soft = 0;
   unsigned kA = 134217727;
@@ -79,22 +88,22 @@ int main() {
               << device.get_info<sycl::info::device::name>().c_str()
               << std::endl;
     {
-      
+      //write data to host-to-device hostpipe
       InputPipeA::write(q, kA);
-      InputPipeA::write(q, kB);
-      //calling kernal that would compute multipier with soft logic
-      q.single_task<KernelCompute>(mult27x27_soft<InputPipeA,OutputPipeB>{}).wait();
-
-      result_soft = OutputPipeB::read(q);
+      InputPipeB::write(q, kB);
+      //launch kernal that would compute multiplication with soft logic
+      q.single_task<KernelCompute>(SoftLogicMult27x27<InputPipeA,InputPipeB,OutputPipeC>{}).wait();
+      //read data from device-to-host hostpipe
+      result_soft = OutputPipeC::read(q);
     }
     {
-      
-      InputPipeC::write(q, kA);
-      InputPipeC::write(q, kB);
-      // mult27x27_rtl is an RTL library.
-      q.single_task<KernelCompute_RTL>(mult27x27_rtl<InputPipeC,OutputPipeD>{}).wait();
-
-      result = OutputPipeD::read(q);
+      //write data to host-to-device hostpipes
+      InputPipeD::write(q, kA);
+      InputPipeE::write(q, kB);
+      // launch a kernel to call RTL library
+      q.single_task<KernelComputeRTL>(RtlMult27x27<InputPipeD,InputPipeE,OutputPipeF>{}).wait();
+      //read data from device-to-host hostpipe
+      result = OutputPipeF::read(q);
     }
 
   } catch (sycl::exception const &e) {
