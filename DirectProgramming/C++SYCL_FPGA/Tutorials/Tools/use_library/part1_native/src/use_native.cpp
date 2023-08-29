@@ -47,10 +47,9 @@ struct NativeMult27x27 {
   }
 };
 
-// This kernel compute result by performing the basic multipler soft logic
 int main() {
   unsigned long result_native = 0;
-  unsigned kA = 134217727;
+  unsigned kA = 134217727; // 0x7FFFFFF is the largest possible ac_int<27, false>.
   unsigned kB = 100;
 
   // Select the FPGA emulator (CPU), FPGA simulator, or FPGA device
@@ -97,7 +96,6 @@ int main() {
 
   // Check the results
   unsigned long expected_result = (unsigned long) kA * kB;
-
   if (result_native != expected_result) {
     std::cout << "FAILED: result (" << result_native << ") is incorrect! Expected " << expected_result << "\n";
     return -1;

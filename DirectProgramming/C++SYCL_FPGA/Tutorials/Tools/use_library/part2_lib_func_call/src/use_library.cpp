@@ -41,10 +41,8 @@ struct RtlMult27x27 {
   }
   
   void operator()() const {
-    unsigned a_val = PipeIn1::read();
-    unsigned b_val = PipeIn2::read();
-    MyInt27 a = a_val;
-    MyInt27 b = b_val;
+    MyInt27 a_val = PipeIn1::read();
+    MyInt27 b_val = PipeIn2::read();
     MyInt54 res = RtlDSPm27x27u(a, b);
     PipeOut::write(res);
   }
