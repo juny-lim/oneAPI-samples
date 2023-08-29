@@ -14,6 +14,8 @@
 
 #include "exception_handler.hpp"
 
+#include <stdint.h>
+
 // Forward declare the kernel name in the global scope.
 // This FPGA best practice reduces name mangling in the optimization report.
 class KernelComputeRTL;
@@ -22,11 +24,11 @@ class KernelComputeRTL;
 // IDPipeA and IDPipeB will be written to by the host, and then read by the kernel (device)
 // IDPipeC will be written to by the kernel (device), and then read by the host
 class IDPipeA;
-using InputPipeA = sycl::ext::intel::experimental::pipe<IDPipeA, unsigned>;
+using InputPipeA = sycl::ext::intel::experimental::pipe<IDPipeA, uint32_t>;
 class IDPipeB;
-using InputPipeB = sycl::ext::intel::experimental::pipe<IDPipeB, unsigned>;
+using InputPipeB = sycl::ext::intel::experimental::pipe<IDPipeB, uint32_t>;
 class IDPipeC;
-using OutputPipeC = sycl::ext::intel::experimental::pipe<IDPipeC, unsigned long>;
+using OutputPipeC = sycl::ext::intel::experimental::pipe<IDPipeC, uint64_t>;
 
 // This kernel computes multiplier result by calling RTL function RtlDSPm27x27u
 template <typename PipeIn1, typename PipeIn2, typename PipeOut>
@@ -41,9 +43,9 @@ struct RtlMult27x27 {
   }
   
   void operator()() const {
-    MyInt27 a_val = PipeIn1::read();
-    MyInt27 b_val = PipeIn2::read();
-    MyInt54 res = RtlDSPm27x27u(a, b);
+    uint32_t a_val = PipeIn1::read();
+    uint32_t b_val = PipeIn2::read();
+    uint64_t res = RtlDSPm27x27u(a_val, b_val);
     PipeOut::write(res);
   }
 };

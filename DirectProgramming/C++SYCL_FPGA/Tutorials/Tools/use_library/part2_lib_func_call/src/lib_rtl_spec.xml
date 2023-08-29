@@ -15,9 +15,9 @@
       <AVALON port="iready" type="iready"/>
       <AVALON port="ovalid" type="ovalid"/>
       <AVALON port="oready" type="oready"/>
-      <INPUT  port="ax" width="27"/>
-      <INPUT  port="ay" width="27"/>
-      <OUTPUT port="resulta" width="54"/>
+      <INPUT  port="x" width="32"/>
+      <INPUT  port="y" width="32"/>
+      <OUTPUT port="result" width="64"/>
     </INTERFACE>
     <REQUIREMENTS>
       <FILE name="lib_rtl.v" />

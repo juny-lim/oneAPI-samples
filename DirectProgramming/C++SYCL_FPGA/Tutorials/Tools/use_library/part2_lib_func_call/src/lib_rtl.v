@@ -11,10 +11,20 @@ module dsp_27x27u #(
     input   iready,
     output  ovalid,
     output  oready,
-    input [AX_WIDTH-1:0] ax,
-    input [AY_WIDTH-1:0] ay,
-    output [RESULT_A_WIDTH-1:0] resulta
+    input [31:0] x,
+    input [31:0] y,
+    output [63:0] result
 );
+
+    wire [AX_WIDTH-1:0] ax;
+    wire [AY_WIDTH-1:0] ay;
+    wire [RESULT_A_WIDTH-1:0] resulta;
+
+    assign ax = x[AX_WIDTH-1:0];
+    assign ay = y[AY_WIDTH-1:0];
+
+    wire [64-RESULT_A_WIDTH:0] resultPadding = `0;
+    assign result = {resultPadding, resulta};
  
 initial begin
     if ((FAMILY == "Agilex") && ((LATENCY < 2) || (LATENCY > 4)))
